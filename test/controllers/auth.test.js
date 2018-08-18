@@ -24,18 +24,16 @@ describe('Controller: Auth', function () {
   before(async () => {
     try {
       await User.remove({});
-      done();
     } catch (err) {
-      done(err);
+      console.log(err);
     }
   });
 
   after(async () => {
     try {
       await User.remove({});
-      done();
     } catch (err) {
-      done(err);
+      console.log(err);
     }
   });
 
@@ -48,7 +46,6 @@ describe('Controller: Auth', function () {
         .send({...user, email: 'foobar'})
         .end((err, res) => {
           res.should.have.status(400);
-          done();
         });
 
     });
@@ -60,7 +57,6 @@ describe('Controller: Auth', function () {
         .send(user)
         .end((err, res) => {
           res.should.have.status(200);
-          done();
         });
 
     });
@@ -76,7 +72,6 @@ describe('Controller: Auth', function () {
         .send({email: user.email})
         .end((err, res) => {
           res.should.have.status(400);
-          done();
         });
 
     });
@@ -89,7 +84,6 @@ describe('Controller: Auth', function () {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.have.property('token');
-          done();
         });
 
     });

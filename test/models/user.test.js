@@ -9,23 +9,21 @@ const User = require('../../src/models/user');
 
 let assert = require('assert');
 
-describe('Model: User', (done) => {
+describe('Model: User', () => {
 
   before(async () => {
     try {
       await User.remove({});
-      done();
     } catch (err) {
-      done(err);
+      console.log(err);
     }
   });
 
   after(async () => {
     try {
       await User.remove({});
-      done();
     } catch (err) {
-      done(err);
+      connsole.log(err);
     }
   });
 
@@ -36,7 +34,6 @@ describe('Model: User', (done) => {
       const { errors } = await user.validateSync();
       expect(errors.email.kind).to.equal('required');
       expect(errors.email.kind).to.equal('required');
-      done();
     });
 
     it('Should add user with pass data', async () => {
@@ -55,7 +52,6 @@ describe('Model: User', (done) => {
       result.should.have.property('firstName');
       result.should.have.property('lastName');
       result.should.have.property('password');
-      done();
 
     });
 
