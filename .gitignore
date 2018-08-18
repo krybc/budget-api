@@ -1,0 +1,10 @@
+### ide
+.idea
+
+
+### environment
+.env
+
+
+### packages
+/node_modules/
