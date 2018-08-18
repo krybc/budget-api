@@ -14,16 +14,18 @@ describe('Model: User', (done) => {
   before(async () => {
     try {
       await User.remove({});
+      done();
     } catch (err) {
-
+      done(err);
     }
   });
 
   after(async () => {
     try {
       await User.remove({});
+      done();
     } catch (err) {
-
+      done(err);
     }
   });
 
@@ -34,6 +36,7 @@ describe('Model: User', (done) => {
       const { errors } = await user.validateSync();
       expect(errors.email.kind).to.equal('required');
       expect(errors.email.kind).to.equal('required');
+      done();
     });
 
     it('Should add user with pass data', async () => {
@@ -52,6 +55,7 @@ describe('Model: User', (done) => {
       result.should.have.property('firstName');
       result.should.have.property('lastName');
       result.should.have.property('password');
+      done();
 
     });
 
