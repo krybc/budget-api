@@ -25,8 +25,7 @@ describe('Controller: Auth', function () {
     try {
       await User.remove({});
     } catch (err) {
-      console.log(err);
-      done(err);
+
     }
   });
 
@@ -34,8 +33,7 @@ describe('Controller: Auth', function () {
     try {
       await User.remove({});
     } catch (err) {
-      console.log(err);
-      done(err);
+
     }
   });
 

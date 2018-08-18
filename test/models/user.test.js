@@ -15,8 +15,7 @@ describe('Model: User', (done) => {
     try {
       await User.remove({});
     } catch (err) {
-      console.log(err);
-      done(err);
+
     }
   });
 
@@ -24,8 +23,7 @@ describe('Model: User', (done) => {
     try {
       await User.remove({});
     } catch (err) {
-      console.log(err);
-      done(err);
+
     }
   });
 
