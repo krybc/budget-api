@@ -21,19 +21,19 @@ describe('Controller: Auth', function () {
     password: "test"
   };
 
-  before(async () => {
+  before(async (done) => {
     try {
       await User.remove({});
     } catch (err) {
-      console.log(err);
+      done(err);
     }
   });
 
-  after(async () => {
+  after(async (done) => {
     try {
       await User.remove({});
     } catch (err) {
-      console.log(err);
+      done(err);
     }
   });
 
