@@ -7,4 +7,10 @@ mongoose.Promise = global.Promise;
 // If debug run the mongoose debug options
 mongoose.set('debug', constants.mongodb.debug);
 
-mongoose.connect(constants.mongodb.url);
+mongoose.connect(constants.mongodb.url)
+  .then(() => {
+
+  })
+  .catch((err) => {
+    console.log("Not Connected to Database ERROR! ", err);
+  });
