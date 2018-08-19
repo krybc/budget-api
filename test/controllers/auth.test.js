@@ -21,7 +21,7 @@ describe('Controller: Auth', function () {
     password: "test"
   };
 
-  before(async (done) => {
+  before(async () => {
     try {
       await User.remove({});
     } catch (err) {
@@ -29,7 +29,7 @@ describe('Controller: Auth', function () {
     }
   });
 
-  after(async (done) => {
+  after(async () => {
     try {
       await User.remove({});
     } catch (err) {

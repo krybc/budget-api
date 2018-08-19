@@ -11,7 +11,7 @@ let assert = require('assert');
 
 describe('Model: User', () => {
 
-  before(async (done) => {
+  before(async () => {
     try {
       await User.remove({});
     } catch (err) {
@@ -19,7 +19,7 @@ describe('Model: User', () => {
     }
   });
 
-  after(async (done) => {
+  after(async () => {
     try {
       await User.remove({});
     } catch (err) {
