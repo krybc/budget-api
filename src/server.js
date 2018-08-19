@@ -4,10 +4,10 @@ require('./config/database');
 const middlewares = require('./config/middlewares');
 const router = require('./config/router/index');
 
-const app = express();
+const server = express();
 
-middlewares(app);
+middlewares(server);
 
-app.use(router);
+server.use(router);
 
-module.exports = app;
+module.exports = server;

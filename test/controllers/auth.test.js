@@ -1,11 +1,10 @@
-process.env.NODE_ENV = 'test';
-
 let mongoose = require('mongoose');
-let User = require('../../src/models/user');
-
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let server = require('../../src/index');
+
+let server = require('../../src/server');
+let User = require('../../src/models/user');
+
 let should = chai.should();
 
 chai.use(chaiHttp);
@@ -25,15 +24,16 @@ describe('Controller: Auth', function () {
     try {
       await User.remove({});
     } catch (err) {
-      done(err);
+      throw err;
     }
   });
 
   after(async () => {
     try {
       await User.remove({});
+      await mongoose.connection.close();
     } catch (err) {
-      done(err);
+      throw err;
     }
   });
 
@@ -41,23 +41,29 @@ describe('Controller: Auth', function () {
 
     it('Should signup with invalid data', async () => {
 
-      chai.request(server)
-        .post('/auth/signup')
-        .send({...user, email: 'foobar'})
-        .end((err, res) => {
-          res.should.have.status(400);
-        });
+      try {
+        let res = await chai.request(server)
+          .post('/auth/signup')
+          .send({...user, email: 'foobar'});
+
+        res.should.have.status(400);
+      } catch (e) {
+        throw e;
+      }
 
     });
 
     it('Should signup with pass data', async () => {
 
-      chai.request(server)
-        .post('/auth/signup')
-        .send(user)
-        .end((err, res) => {
-          res.should.have.status(200);
-        });
+      try {
+        let res = await chai.request(server)
+          .post('/auth/signup')
+          .send(user);
+
+        res.should.have.status(200);
+      } catch (e) {
+        throw e;
+      }
 
     });
 
@@ -67,24 +73,30 @@ describe('Controller: Auth', function () {
 
     it('Should signin without password', async () => {
 
-      chai.request(server)
-        .post('/auth/signin')
-        .send({email: user.email})
-        .end((err, res) => {
-          res.should.have.status(400);
-        });
+      try {
+        let res = await chai.request(server)
+          .post('/auth/signin')
+          .send({email: user.email});
+
+        res.should.have.status(400);
+      } catch (e) {
+        throw e;
+      }
 
     });
 
     it('Should signin with pass data', async () => {
 
-      chai.request(server)
-        .post('/auth/signin')
-        .send({email: user.email, password: user.password})
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.have.property('token');
-        });
+      try {
+        let res = await chai.request(server)
+          .post('/auth/signin')
+          .send({email: user.email, password: user.password});
+
+        res.should.have.status(200);
+        res.body.should.have.property('token');
+      } catch (e) {
+        throw e;
+      }
 
     });
 

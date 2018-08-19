@@ -6,7 +6,7 @@ const validator = require('express-validation');
 const validatorSchema = require('../validator/user');
 
 
-router.post("/auth/signin", authLocal, validator(validatorSchema.signin), AuthController.signin);
+router.post("/auth/signin", authLocal, AuthController.signin);
 router.post("/auth/signup", validator(validatorSchema.create), AuthController.signup);
 
 module.exports = router;

@@ -9,7 +9,7 @@ mongoose.set('debug', constants.mongodb.debug);
 
 mongoose.connect(constants.mongodb.url)
   .then(() => {
-
+    console.log("Connection to mongo established");
   })
   .catch((err) => {
     console.log("Not Connected to Database ERROR! ", err);

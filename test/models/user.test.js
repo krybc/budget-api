@@ -1,3 +1,6 @@
+let mongoose = require('mongoose');
+let constants = require('../../src/config/constants');
+
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 
@@ -5,7 +8,7 @@ let expect = chai.expect;
 let should = chai.should();
 chai.use(chaiHttp);
 
-const User = require('../../src/models/user');
+const UserTest = require('../../src/models/user');
 
 let assert = require('assert');
 
@@ -13,24 +16,26 @@ describe('Model: User', () => {
 
   before(async () => {
     try {
-      await User.remove({});
+      await mongoose.connect(constants.mongodb.url);
+      await UserTest.remove({});
     } catch (err) {
-      done(err);
+      throw err;
     }
   });
 
   after(async () => {
     try {
-      await User.remove({});
+      await UserTest.remove({});
+      await mongoose.connection.close();
     } catch (err) {
-      done(err);
+      throw err;
     }
   });
 
-  describe('#save()', () => {
+  describe('create', () => {
 
     it('Should required email and password', async () => {
-      const user = new User();
+      const user = new UserTest();
       const { errors } = await user.validateSync();
       expect(errors.email.kind).to.equal('required');
       expect(errors.email.kind).to.equal('required');
@@ -45,7 +50,7 @@ describe('Model: User', () => {
         password: "test"
       };
 
-      const result = await User.create(user);
+      const result = await UserTest.create(user);
 
       result.should.be.a('object');
       result.should.have.property('email');
@@ -57,7 +62,7 @@ describe('Model: User', () => {
 
   });
 
-  describe('PUT /auth/update', () => {
+  describe('update', () => {
 
     it('Should edit user with pass data', async () => {
 
@@ -68,7 +73,7 @@ describe('Model: User', () => {
         password: "test"
       };*/
 
-      const user = await User.findOne({email: "foo@bar.com"});
+      const user = await UserTest.findOne({email: "foo@bar.com"});
       user.set({password: "dupa"});
       const result = await user.save();
 
@@ -82,7 +87,7 @@ describe('Model: User', () => {
 
   });
 
-  describe('DELETE /auth/delete', () => {
+  describe('delete', () => {
 
     it('Should delete user', async () => {
 
