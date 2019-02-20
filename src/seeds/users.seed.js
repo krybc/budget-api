@@ -1,7 +1,7 @@
 //db.users.remove({});
 
 let userSeed = {
-  email: 'kamil@rybczynski.me',
+  email: 'demo@example.com',
   firstName: 'Kamil',
   lastName: 'Rybczyński',
   password: 'demo'

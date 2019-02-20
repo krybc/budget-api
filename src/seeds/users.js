@@ -9,7 +9,7 @@ module.exports = new class UsersSeed {
   data() {
     return [
       new User({
-        email: 'kamil@rybczynski.me',
+        email: 'demo@example.com',
         firstName: 'Kamil',
         lastName: 'Rybczyński',
         password: 'demo'
