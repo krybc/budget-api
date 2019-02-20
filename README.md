@@ -1,6 +1,6 @@
 # Home budgeting - API
-[![Build Status](https://travis-ci.org/kamil-rybczynski/budget-api.svg?branch=master)](https://travis-ci.org/kamil-rybczynski/budget-api)
-[![Coverage Status](https://coveralls.io/repos/github/kamil-rybczynski/budget-api/badge.svg)](https://coveralls.io/github/kamil-rybczynski/budget-api)
+[![Build Status](https://travis-ci.org/krybc/budget-api.svg?branch=master)](https://travis-ci.org/kamil-rybczynski/budget-api)
+[![Coverage Status](https://coveralls.io/repos/github/krybc/budget-api/badge.svg)](https://coveralls.io/github/kamil-rybczynski/budget-api)
 
 ## About
 
