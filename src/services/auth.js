@@ -33,7 +33,7 @@ const localLogin = new LocalStrategy(
  * JWT Strategy Auth
  */
 const jwtOpts = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
   secretOrKey: constants.jwt.secret,
 };
 

@@ -3,7 +3,7 @@ const Joi = require('joi');
 const category = {
   body: {
     group: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
-    name: Joi.string().required(),
+    name: Joi.string().required().min(3),
     type: Joi.number().integer().required(),
   }
 };

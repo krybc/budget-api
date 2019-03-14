@@ -20,8 +20,12 @@ router.use(ExpenseRouter);
 router.use(AccountRouter);
 
 router.use((err, req, res, next) => {
+  console.log(err.name);
+  console.log(err instanceof validator.ValidationError);
   if (err instanceof validator.ValidationError) {
-    res.status(err.status).json(err);
+    res.status(400).json(err);
+  } else if (err.name !== undefined && err.name === 'ValidationError') {
+    res.status(400).json(err);
   } else {
     res.status(500)
       .json({

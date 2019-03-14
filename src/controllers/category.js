@@ -63,8 +63,7 @@ exports.remove = async function(req, res, next) {
   try {
     const category = await Category.findOne(filter);
 
-    const transactions = await Transaction.find({category: category._id});
-    Joi.assert(transactions.length, Joi.number().integer().max(0), 'Category must not contrains any transactions');
+    await Transaction.deleteMany({ category: category._id });
 
     res.json(await Category.findOneAndRemove(filter));
   } catch (err) {

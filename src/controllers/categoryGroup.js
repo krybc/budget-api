@@ -1,4 +1,5 @@
 const CategoryGroup = require('../models/categoryGroup');
+const Category  = require('../models/category');
 const Joi = require('joi');
 
 exports.create = async function(req, res, next) {
@@ -47,7 +48,7 @@ exports.update = async function(req, res, next) {
   try {
     res.json(await CategoryGroup.findOneAndUpdate(filter, update, { new: true }));
   } catch (err) {
-    return next(err);
+    next(err);
   }
 };
 
@@ -59,11 +60,12 @@ exports.remove = async function(req, res, next) {
   try {
     const categoryGroup = await CategoryGroup.findOne(filter);
 
-    const categories = await Transaction.find({group: categoryGroup._id});
-    Joi.assert(categories.length, Joi.number().integer().max(0), 'Category group must not contrains any categories');
+    const categories = await Category.find({group: categoryGroup._id});
+
+    Joi.assert(categories.length, Joi.number().integer().max(0), 'Category group must not contains any categories');
 
     res.json(await CategoryGroup.findOneAndRemove(filter));
   } catch (err) {
-    return next(err);
+    next(err);
   }
 };

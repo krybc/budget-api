@@ -13,6 +13,14 @@
 
 ## Roadmap
 
+### 0.2.0
+
+- [ ] Feature: Statistics for contractors
+- [ ] Feature: Statistics for accounts
+- [ ] Functional tests for category groups
+- [ ] Functional tests for categories
+- [ ] Unification of form validation errors response
+
 ### 0.1.0
 
 - [x] Create, update, get, list and delete transaction
@@ -22,5 +30,5 @@
 - [x] Removing category api endpoint
 - [x] Removing category group api endpoint
 - [x] Functional tests for signin and signup
-- [ ] Travis CI and Coveralls integration
+- [x] Travis CI and Coveralls integration
 
