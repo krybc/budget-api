@@ -8,7 +8,7 @@
 
 1. Run `npm install`
 2. Run `npm run seeds` to load initial data to mongo
-3. 
+3. Run `npm dev` to run in dev mode by nodemon
 
 
 ## Roadmap
