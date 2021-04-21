@@ -31,7 +31,7 @@ export class Category {
   type: number;
 
   @Column({ type: 'smallint' })
-  order: number;
+  sequence: number;
 
   @OneToMany((type) => Transaction, (transaction) => transaction.category, {
     onDelete: 'CASCADE',

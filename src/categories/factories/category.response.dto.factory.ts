@@ -8,7 +8,7 @@ export class CategoryResponseDtoFactory {
     result.name = entity.name;
     result.parentId = entity.parent ? entity.parent.id : null;
     result.type = entity.type;
-    result.order = entity.order;
+    result.sequence = entity.sequence;
 
     return result;
   }

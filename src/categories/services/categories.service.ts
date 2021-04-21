@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Connection } from 'typeorm';
+import { Connection, MoreThanOrEqual } from 'typeorm';
 import { CreateCategoryRequestDto } from '../dto/create-category.request.dto';
 import { CategoryFactory } from '../factories/category.factory';
 import { CategoryRepository } from '../../core/repositories/category.repository';
@@ -48,7 +48,7 @@ export class CategoriesService {
   async getOneById(id: number) {
     const category = await this.categoryRepository.findOne(
       {
-        id: id,
+        id,
       },
       { relations: ['parent'] },
     );
@@ -59,6 +59,7 @@ export class CategoriesService {
   async getList() {
     const categories = await this.categoryRepository.find({
       relations: ['parent'],
+      order: { sequence: 'ASC' },
     });
 
     return categories.map((item) =>
@@ -70,5 +71,55 @@ export class CategoriesService {
     return await this.categoryRepository.find({
       relations: ['childrens'],
     });
+  }
+
+  async changeOrder(id: number, sequence: number) {
+    const category = await this.categoryRepository.findOne(
+      { id },
+      { relations: ['parent'] },
+    );
+
+    const categoriesToChangeSequence = await this.getCategoriesToChangeSequence(
+      category,
+      sequence,
+    );
+
+    for (const item of categoriesToChangeSequence) {
+      await this.categoryRepository.save(item);
+    }
+
+    category.sequence = sequence;
+    return await this.categoryRepository.save(category);
+  }
+
+  private async getCategoriesToChangeSequence(
+    category: Category,
+    sequence: number,
+  ): Promise<Category[]> {
+    const categories = await this.categoryRepository.find({
+      where: {
+        parent: category.parent,
+      },
+      order: { sequence: 'ASC' },
+    });
+
+    categories.splice(
+      categories.indexOf(categories.find((it) => it.id === category.id)),
+      1,
+    );
+
+    let index = 1;
+    for (const item of categories) {
+      if (index !== sequence) {
+        item.sequence = index;
+      } else {
+        ++index;
+        item.sequence = index;
+      }
+
+      index++;
+    }
+
+    return categories;
   }
 }

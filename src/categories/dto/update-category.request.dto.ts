@@ -11,5 +11,5 @@ export class UpdateCategoryRequestDto {
   type: number;
 
   @IsNumber()
-  order: number;
+  sequence: number;
 }

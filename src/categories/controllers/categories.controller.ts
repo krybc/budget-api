@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
 } from '@nestjs/common';
@@ -44,5 +45,15 @@ export class CategoriesController {
   @Get()
   async list() {
     return this.categoriesService.getList();
+  }
+
+  @Patch(':id/order/:sequence')
+  async order(
+    @Param('id') idParam: string,
+    @Param('sequence') sequenceParam: string,
+  ) {
+    const id = parseInt(idParam);
+    const sequence = parseInt(sequenceParam);
+    this.categoriesService.changeOrder(id, sequence);
   }
 }

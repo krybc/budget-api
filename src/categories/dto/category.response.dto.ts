@@ -3,5 +3,5 @@ export class CategoryResponseDto {
   parentId: number;
   name: string;
   type: number;
-  order: number;
+  sequence: number;
 }

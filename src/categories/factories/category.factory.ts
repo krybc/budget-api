@@ -27,6 +27,13 @@ export class CategoryFactory {
       return Object.assign(new Category(), dto, { parent });
     }
 
+    const lastCategory = await this.categoryRepository.findOne(
+      { parent: parent ?? null },
+      { order: { sequence: 'DESC' } },
+    );
+
+    dto.order = lastCategory ? ++lastCategory.sequence : 0;
+
     return Object.assign(new Category(), dto);
   }
 
@@ -48,7 +55,7 @@ export class CategoryFactory {
 
     category.name = dto.name;
     category.type = dto.type;
-    category.order = dto.order;
+    category.sequence = dto.sequence;
 
     return category;
   }
