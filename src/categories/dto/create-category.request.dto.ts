@@ -10,5 +10,5 @@ export class CreateCategoryRequestDto {
   type: number;
 
   @IsNumber()
-  order: number;
+  sequence: number;
 }

@@ -32,7 +32,7 @@ export class CategoryFactory {
       { order: { sequence: 'DESC' } },
     );
 
-    dto.order = lastCategory ? ++lastCategory.sequence : 0;
+    dto.sequence = lastCategory ? ++lastCategory.sequence : 0;
 
     return Object.assign(new Category(), dto);
   }
