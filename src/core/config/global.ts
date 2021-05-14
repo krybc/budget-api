@@ -5,5 +5,5 @@ export interface GlobalConfig {
 }
 
 export default registerAs('global', () => ({
-  port: parseInt(process.env.HTTP_PORT, 10) || 3000,
+  port: parseInt(process.env.SERVER_PORT, 10) || 3000,
 }));
